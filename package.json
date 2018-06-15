@@ -1,0 +1,40 @@
+{
+  "name": "rxp-hello-world",
+  "version": "1.2.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "wait:bundle": "wait-on --window 10000 ./dist/bundle.js",
+    "web": "npm-run-all --parallel web:*",
+    "web:watch": "webpack --progress --colors --watch",
+    "web:dev": "npm-run-all --serial wait:bundle web:dev:start",
+    "web:dev:start": "live-server . --port=8090",
+    "rn": "npm-run-all --parallel rn:*",
+    "rn:watch": "tsc --watch",
+    "rn:dev": "npm-run-all --serial wait:bundle rn:dev:start",
+    "rn:dev:start": "node node_modules/react-native/local-cli/cli.js start",
+    "rn:start:wait": "wait-on tcp:8081",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "lint": "tslint --project tsconfig.json -r tslint.json -r ./node_modules/tslint-microsoft-contrib --fix || true"
+  },
+  "devDependencies": {
+    "@types/webpack": "^4.4.0",
+    "awesome-typescript-loader": "^5.0.0",
+    "source-map-loader": "^0.2.3",
+    "ts-node": "^6.0.3",
+    "typescript": "^2.8.1",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  },
+  "dependencies": {
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-native": "^0.54.0",
+    "react-native-windows": "^0.54.0",
+    "reactxp": "^1.2.0",
+    "reactxp-imagesvg": "^1.2.0",
+    "reactxp-navigation": "^1.2.0",
+    "reactxp-video": "^1.2.0"
+  }
+}
