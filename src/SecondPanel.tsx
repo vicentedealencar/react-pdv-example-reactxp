@@ -19,7 +19,7 @@ interface SecondPanelState {
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
-        alignSelf: 'stretch',
+        flexGrow: 1,
         backgroundColor: '#f5fcff'
     }),
     container: RX.Styles.createViewStyle({
@@ -79,7 +79,7 @@ class SecondPanel extends RX.Component<SecondPanelProps, SecondPanelState> {
 
     render() {
         return (
-            <RX.View useSafeInsets={ true }>
+            <RX.View useSafeInsets={ true } style={ styles.scroll }>
                 <RX.ScrollView style={ styles.scroll }>
                     <RX.View style={ styles.container }>
                         <RX.Button style={ styles.roundButton } onPress={ this._onPressBack }>

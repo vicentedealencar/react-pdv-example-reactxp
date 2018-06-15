@@ -3,6 +3,7 @@
 */
 
 import RX = require('reactxp');
+import Cart = require('./Cart');
 
 interface MainPanelProps {
     onPressNavigate: () => void;
@@ -10,7 +11,7 @@ interface MainPanelProps {
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
-        alignSelf: 'stretch',
+        flexGrow: 1,
         backgroundColor: '#f5fcff'
     }),
     container: RX.Styles.createViewStyle({
@@ -22,15 +23,6 @@ const styles = {
         fontSize: 48,
         fontWeight: 'bold',
         marginBottom: 28
-    }),
-    welcome: RX.Styles.createTextStyle({
-        fontSize: 32,
-        marginBottom: 12
-    }),
-    instructions: RX.Styles.createTextStyle({
-        fontSize: 16,
-        color: '#aaa',
-        marginBottom: 16
     }),
     docLink: RX.Styles.createLinkStyle({
         fontSize: 16,
@@ -80,18 +72,15 @@ class MainPanel extends RX.Component<MainPanelProps, null> {
 
     render() {
         return (
-            <RX.View useSafeInsets={ true }>
+            <RX.View useSafeInsets={ true } style={ styles.scroll }>
                 <RX.ScrollView style={ styles.scroll }>
                     <RX.View style={ styles.container }>
                         <RX.Animated.Text style={ [styles.helloWorld, this._animatedStyle] }>
                             Hello World
                         </RX.Animated.Text>
-                        <RX.Text style={ styles.welcome }>
-                            Welcome to ReactXP
-                        </RX.Text>
-                        <RX.Text style={ styles.instructions }>
-                            Edit App.tsx to get started
-                        </RX.Text>
+
+                        <Cart />
+
                         <RX.Link style={ styles.docLink } url={ 'https://microsoft.github.io/reactxp/docs' }>
                             View ReactXP documentation
                         </RX.Link>
