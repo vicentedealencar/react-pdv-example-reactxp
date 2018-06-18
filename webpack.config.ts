@@ -1,4 +1,4 @@
-import * as webpack from 'webpack';
+import * as webpack from "webpack";
 
 const config: webpack.Configuration = {
     entry: "./src/index.tsx",
@@ -8,17 +8,17 @@ const config: webpack.Configuration = {
         path: __dirname + "/dist"
     },
 
-    // Enable sourcemaps for debugging webpack's output.
+    // enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
 
     resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
+        // add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
 
     module: {
         rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+            // all files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
         ]
     }

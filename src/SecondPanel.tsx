@@ -2,19 +2,19 @@
 * This file demonstrates a basic ReactXP app.
 */
 
-import RX = require('reactxp');
-import { default as RXVideo } from 'reactxp-video';
+import RX = require('reactxp')
+import { default as RXVideo } from 'reactxp-video'
 
-import ProgressIndicator from './ProgressIndicator';
-import ToggleSwitch from './ToggleSwitch';
+import ProgressIndicator from './ProgressIndicator'
+import ToggleSwitch from './ToggleSwitch'
 
 interface SecondPanelProps {
-    onNavigateBack: () => void;
+    onNavigateBack: () => void
 }
 
 interface SecondPanelState {
-    toggleValue?: boolean;
-    progressValue?: number;
+    toggleValue?: boolean
+    progressValue?: number
 }
 
 const styles = {
@@ -54,27 +54,27 @@ const styles = {
         marginHorizontal: 12,
         color: 'white'
     })
-};
+}
 
 class SecondPanel extends RX.Component<SecondPanelProps, SecondPanelState> {
-    private _progressTimerToken: number;
-    private _mountedVideo: RXVideo;
+    private _progressTimerToken: number
+    private _mountedVideo: RXVideo
 
     constructor(props: SecondPanelProps) {
-        super(props);
+        super(props)
 
         this.state = {
             toggleValue: true,
             progressValue: 0
-        };
+        }
     }
 
     componentDidMount() {
-        this._startProgressIndicator();
+        this._startProgressIndicator()
     }
 
     componentWillUnmount() {
-        this._stopProgressIndicator();
+        this._stopProgressIndicator()
     }
 
     render() {
@@ -119,35 +119,35 @@ class SecondPanel extends RX.Component<SecondPanelProps, SecondPanelState> {
                     </RX.View>
                 </RX.ScrollView>
             </RX.View>
-        );
+        )
     }
 
     private _onMountVideo = (component: RXVideo|null) => {
-        this._mountedVideo = component;
+        this._mountedVideo = component
     }
 
     private _onPressBack = () => {
-        this.props.onNavigateBack();
+        this.props.onNavigateBack()
     }
 
     private _playVideo = () => {
         if (this._mountedVideo) {
-            this._mountedVideo.mute(true);
-            this._mountedVideo.play();
+            this._mountedVideo.mute(true)
+            this._mountedVideo.play()
         }
     }
 
     private _startProgressIndicator() {
         this._progressTimerToken = window.setInterval(() => {
-            const newProgressValue = (this.state.progressValue + 0.02) % 1;
-            this.setState({ progressValue: newProgressValue });
-        }, 1000 / 15);
+            const newProgressValue = (this.state.progressValue + 0.02) % 1
+            this.setState({ progressValue: newProgressValue })
+        }, 1000 / 15)
     }
 
     private _stopProgressIndicator() {
         if (this._progressTimerToken) {
-            window.clearInterval(this._progressTimerToken);
-            this._progressTimerToken = undefined;
+            window.clearInterval(this._progressTimerToken)
+            this._progressTimerToken = undefined
         }
     }
 
@@ -157,8 +157,8 @@ class SecondPanel extends RX.Component<SecondPanelProps, SecondPanelState> {
     // not change. We want to avoid unnecessary prop changes because this will trigger
     // extra work within React's virtual DOM diffing mechanism.
     private _onChangeToggle = (newValue: boolean) => {
-        this.setState({ toggleValue: newValue });
+        this.setState({ toggleValue: newValue })
     }
 }
 
-export = SecondPanel;
+export = SecondPanel

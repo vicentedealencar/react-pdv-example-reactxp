@@ -2,14 +2,14 @@
 * This file demonstrates a basic ReactXP app.
 */
 
-import RX = require('reactxp');
-import Cart = require('./Cart');
+import RX = require('reactxp')
+import Cart = require('./Cart')
 
-interface MainPanelProps {
+type MainPanelProps = {
     onPressNavigate: () => void;
 }
 
-const styles = {
+const styles: { [name: string]: RX.Types.StyleRuleSet<any> } = {
     scroll: RX.Styles.createScrollViewStyle({
         flexGrow: 1,
         backgroundColor: '#f5fcff'
@@ -40,37 +40,37 @@ const styles = {
         marginHorizontal: 12,
         color: 'white'
     })
-};
+}
 
 class MainPanel extends RX.Component<MainPanelProps, null> {
-    private _translationValue: RX.Animated.Value;
-    private _animatedStyle: RX.Types.AnimatedTextStyleRuleSet;
+    private _translationValue: RX.Animated.Value
+    private _animatedStyle: RX.Types.AnimatedTextStyleRuleSet
 
     constructor(props: MainPanelProps) {
-        super(props);
+        super(props)
 
-        this._translationValue = RX.Animated.createValue(-100);
+        this._translationValue = RX.Animated.createValue(-100)
         this._animatedStyle = RX.Styles.createAnimatedTextStyle({
             transform: [
                 {
                     translateY: this._translationValue
                 }
             ]
-        });
+        })
     }
 
-    componentDidMount() {
-        let animation = RX.Animated.timing(this._translationValue, {
+    componentDidMount(): void {
+        const animation: RX.Types.Animated.CompositeAnimation = RX.Animated.timing(this._translationValue, {
               toValue: 0,
               easing: RX.Animated.Easing.OutBack(),
               duration: 500
             }
-        );
+        )
 
-        animation.start();
+        animation.start()
     }
 
-    render() {
+    render(): JSX.Element {
         return (
             <RX.View useSafeInsets={ true } style={ styles.scroll }>
                 <RX.ScrollView style={ styles.scroll }>
@@ -79,26 +79,33 @@ class MainPanel extends RX.Component<MainPanelProps, null> {
                             Hello World
                         </RX.Animated.Text>
 
-                        <Cart />
+                        <Cart Button={RoundButton} />
 
                         <RX.Link style={ styles.docLink } url={ 'https://microsoft.github.io/reactxp/docs' }>
                             View ReactXP documentation
                         </RX.Link>
-                        
-                        <RX.Button style={ styles.roundButton } onPress={ this._onPressNavigate }>
-                            <RX.Text style={ styles.buttonText }>
-                                See More Examples
-                            </RX.Text>
-                        </RX.Button>
+
+                        <RoundButton onPress={ this._onPressNavigate }>
+                            See More Examples
+                        </RoundButton>
                     </RX.View>
                 </RX.ScrollView>
             </RX.View>
-        );
+        )
     }
-    
+
     private _onPressNavigate = () => {
-        this.props.onPressNavigate();
+        this.props.onPressNavigate()
     }
 }
 
-export = MainPanel;
+const RoundButton: ({ children, ...otherProps }: {
+    [x: string]: any;
+    children: any;
+}) => JSX.Element = ({children, style, ...otherProps}) => <RX.Button {...otherProps} style={ {...styles.roundButton, ...style} }>
+<RX.Text style={ styles.buttonText }>
+    {children}
+</RX.Text>
+</RX.Button>
+
+export = MainPanel
